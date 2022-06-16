@@ -13,6 +13,7 @@ file(GLOB_RECURSE SOURCE_FILES ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 #include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 add_library(sharedlib SHARED ${SOURCE_FILES} src/library.cpp include/library.h)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 
 #install(FILES ${CMAKE_CURRENT_LIST_DIR}/include/library.h
 #        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/library)

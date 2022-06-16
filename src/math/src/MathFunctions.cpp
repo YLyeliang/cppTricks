@@ -1,6 +1,5 @@
 // created by yel on 2022/5/19
 #include "iostream"
-
 using namespace std;
 
 double power(double base, int exponent) {
