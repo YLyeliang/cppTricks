@@ -1,0 +1,22 @@
+header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: vehicle
+child_frame_id: camera_front_wide
+transform:
+  translation:
+    x: 1.76162779693998
+    y: -0.02178426224539642
+    z: 1.415432524618696
+  rotation:
+    x: 0.5105579157253003
+    y: -0.5048002463496981
+    z: 0.4984673193233714
+    w: -0.4858371166087115
+euler_angle:
+  roll: 88.22406837605801
+  pitch: -178.9404727946982
+  yaw: 89.62259957991157
+description: camera_front_wide to vehicle extrinsics.

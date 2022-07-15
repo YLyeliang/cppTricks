@@ -1,6 +1,6 @@
 #include "config.h"
 #include "library.h"
-#include <argparse/argparse.hpp>
+// #include <argparse/argparse.hpp>
 #include <fstream>
 #include <iostream>
 #ifdef USE_MYMATH
@@ -9,6 +9,7 @@
 #include <cmath>
 #endif
 #include "leastsquare.h"
+#include "matrix_demo.h"
 #include "nlohmann/json.hpp"
 #include "opencv2/opencv.hpp"
 
@@ -157,53 +158,77 @@ void jsonPractice(const string input, const string output) {
     cout << "write json to file:" << output << endl;
 }
 
-int main(int argc, char *argv[]) {
-    argparse::ArgumentParser program("main");
-    program.add_argument("square")
-            .help("display the square of a given integer")
-            .scan<'i', int>();
-    //    program.add_argument("-v", "--verbose");// parameter packing
-    program.add_argument("-i", "--input");
-    program.add_argument("-o", "--output");
-
-    try {
-        program.parse_args(argc, argv);
-    } catch (const std::runtime_error &err) {
-        std::cerr << err.what() << std::endl;
-        std::cerr << program;
-        std::exit(1);
+void ReadTxtDemo() {
+    string file = "../result_smooth.txt";
+    ifstream inf;
+    string s;
+    inf.open(file);
+    double timestamp, pitch, roll;
+    vector<double> t_arr;
+    vector<double> p_arr;
+    vector<double> r_arr;
+    while (getline(inf, s)) {
+        stringstream word(s);
+        if (s == " ")
+            break;
+        word >> timestamp >> pitch >> roll;
+        cout << timestamp << pitch << roll << endl;
+        t_arr.push_back(timestamp / 100);
+        p_arr.push_back(pitch);
+        r_arr.push_back(roll);
     }
+    sort(t_arr.begin(), t_arr.end(), [](double x, double y) { return x < y; });
 
-    auto input = program.get<int>("square");
-    std::cout << (input * input) << std::endl;
+    double tmp = t_arr[0];
+    for (const auto a: t_arr)
+        cout << fixed << setprecision(2) << a << endl;
+}
 
-    std::cout << "Hello, World!" << std::endl;
-
-    std::cout << "math power:" << std::endl;
-    double base = 2;
-    int exponent = 4;
-#ifdef USE_MYMATH
-    cout << "Use our own math library" << endl;
-    double result = power(base, exponent);
-#else
-    cout << "Use the standard library" << endl;
-    double result = pow(base, exponent);
-#endif
-    cout << base << "^" << exponent << "=" << result << endl;
+void WriteTxtDemo() {
+    string file = "write_demo.txt";
+    ofstream out_file(file);
+    Eigen::Quaterniond quat(0, 1, 2, 3);
+    Eigen::Vector3d t_dd(22, 33, 44);
+    cout << quat.w() << quat.x() << quat.y() << quat.z() << endl;
+    cout << t_dd.x() << t_dd.y() << t_dd.z() << endl;
+    out_file << quat.w() << quat.x() << quat.y() << quat.z() << t_dd.x() << t_dd.y() << t_dd.z() << endl;
+    out_file << setprecision(10)<< M_PI <<M_PI <<M_PI <<M_PI << endl;
+}
 
 
-    // json test
-    cout << "Json practice" << endl;
-    //    auto f_in = program.get("i");
-    //    auto f_out = program.get("o");
-    //    jsonPractice(f_in, f_out);
-
-    // least square method test
-    Eigen::VectorXf coeff = norm_test();
-
+int main(int argc, char *argv[]) {
+    //    Eigen::VectorXf coeff = norm_test();
     // ransac test
-    ransacTest();
+    // ransacTest();
+    // WriteTxtDemo();
 
+    double tmp = 1+ + -0.5;
+    // sort test
+    // vector<double> dd{9,5,32,22,2,2,12,5,6,7,3,0.12312312,-0.12312312};
+    // vector<pair<double,int>> aa;
+    // for (auto a:dd)
+    //     aa.emplace_back(a,0);
+    // std::sort(dd.begin(),dd.end(),[](const double i,const double j){return i<j;});
+    // std::sort(aa.begin(),aa.end(),[](pair<double,int> i,pair<double,int> j){return i.first<j.first;});
+    // cout<<aa.end()->first<<endl;
+    // cout<<aa.back().first<<endl;
+    // dd.resize(0);
+    WriteTxtDemo();
+
+
+    size_t test;
+    uint16_t a = 45;
+    uint16_t b = 195;
+    test = a / 100;
+    test = b / 100;
+    vector<double> c(100);
+    cout << c[0] << " " << endl;
+    if (c[0] == 0)
+        a = 99;
+    std::vector<std::pair<size_t, size_t>> idx_group(100);
+
+
+    MatrixBlockDemo();
 
     return 0;
 }
