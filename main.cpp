@@ -97,8 +97,25 @@ void ransacTest() {
 }
 
 
+struct pt2d {
+    float x;
+    float y;
+};
+
 void jsonPractice(const string input, const string output) {
     nlohmann::json j;
+
+    j["2vec"] = {};
+    // struct test, custom struct not work
+    pt2d pp{1, 2};
+    vector<float> pp2{1, 2};
+    j["struct"] = pp2;
+
+    // vector<vector> test
+    vector<vector<int>> vec2{{1, 2, 3}, {2, 2, 3}};
+    j["2vec"][0]["points"] = vec2;
+    j["2vec"][1] = vec2;
+
     // add a number that is stored as double (note the implicit conversion of j to an object)
     j["pi"] = 3.141;
 
@@ -148,10 +165,11 @@ void jsonPractice(const string input, const string output) {
     string s = j.dump();
     cout << "dump to string: " << s << endl;
 
+
     // read from file
-    ifstream i(input);
-    nlohmann::json j5;
-    i >> j;
+    // ifstream i(input);
+    // nlohmann::json j5;
+    // i >> j;
     ofstream o(output);
     // the setw manipulator was overloaded to set the indentation for pretty printing
     o << setw(4) << j << endl;
@@ -192,17 +210,22 @@ void WriteTxtDemo() {
     cout << quat.w() << quat.x() << quat.y() << quat.z() << endl;
     cout << t_dd.x() << t_dd.y() << t_dd.z() << endl;
     out_file << quat.w() << quat.x() << quat.y() << quat.z() << t_dd.x() << t_dd.y() << t_dd.z() << endl;
-    out_file << setprecision(10)<< M_PI <<M_PI <<M_PI <<M_PI << endl;
+    out_file << setprecision(10) << M_PI << M_PI << M_PI << M_PI << endl;
 }
 
 
 int main(int argc, char *argv[]) {
+
+    // 多线程demo
+    ProducerConsumerDemo();
+
+    // json demo
+    // jsonPractice("dd", "tmp.json");
     //    Eigen::VectorXf coeff = norm_test();
     // ransac test
     // ransacTest();
     // WriteTxtDemo();
 
-    double tmp = 1+ + -0.5;
     // sort test
     // vector<double> dd{9,5,32,22,2,2,12,5,6,7,3,0.12312312,-0.12312312};
     // vector<pair<double,int>> aa;
@@ -213,22 +236,9 @@ int main(int argc, char *argv[]) {
     // cout<<aa.end()->first<<endl;
     // cout<<aa.back().first<<endl;
     // dd.resize(0);
-    WriteTxtDemo();
+    // WriteTxtDemo();
 
-
-    size_t test;
-    uint16_t a = 45;
-    uint16_t b = 195;
-    test = a / 100;
-    test = b / 100;
-    vector<double> c(100);
-    cout << c[0] << " " << endl;
-    if (c[0] == 0)
-        a = 99;
-    std::vector<std::pair<size_t, size_t>> idx_group(100);
-
-
-    MatrixBlockDemo();
+    // MatrixBlockDemo();
 
     return 0;
 }

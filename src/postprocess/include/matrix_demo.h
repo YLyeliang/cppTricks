@@ -7,6 +7,7 @@
 #include "Eigen/Dense"
 #include "vector"
 #include "yaml-cpp/yaml.h"
+#include <iostream>
 
 void MatrixBlockDemo();
 #endif//CPPTRICKS_MATRIX_DEMO_H

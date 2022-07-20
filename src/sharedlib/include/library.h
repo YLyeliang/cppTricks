@@ -18,4 +18,6 @@ T sum(T first, Types... rest) {
     return first + sum<T>(rest...);
 }
 
+void ProducerConsumerDemo();
+
 #endif

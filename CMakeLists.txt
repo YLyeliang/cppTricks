@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.10)
 project(cppTricks)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -33,7 +33,7 @@ message("extra libs: " ${EXTRA_LIBS})
 include_directories("${PROJECT_BINARY_DIR}")
 
 # thirdparty
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/argparse)
+#add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/argparse)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/json)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/eigen)
 #include_directories(${CMAKE_CURRENT_LIST_DIR}/src/sharedlib/include)
@@ -41,15 +41,20 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/eigen)
 # sub-function
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/sharedlib)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/postprocess)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/src/pointcloud)
+
+# include directory
 include_directories(${CMAKE_CURRENT_LIST_DIR}/src/postprocess/include)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/pointcloud/include)
 
 add_executable(cppTricks main.cpp)
 target_link_libraries(${PROJECT_NAME} PUBLIC
-        argparse
+        #        argparse
         sharedlib
         postprocess
         nlohmann_json
         eigen
+        pointcloud
         ${EXTRA_LIBS}
         ${OpenCV_LIBS}
         )
