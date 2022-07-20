@@ -7,4 +7,6 @@
 
 extern double power(double base, int exponent);
 
+void MultiThreadTest();
+
 #endif//CPPTRICKS_MATHFUNCTIONS_H

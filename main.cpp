@@ -166,43 +166,7 @@ int main(int argc, char *argv[]) {
     program.add_argument("-i", "--input");
     program.add_argument("-o", "--output");
 
-    try {
-        program.parse_args(argc, argv);
-    } catch (const std::runtime_error &err) {
-        std::cerr << err.what() << std::endl;
-        std::cerr << program;
-        std::exit(1);
-    }
-
-    auto input = program.get<int>("square");
-    std::cout << (input * input) << std::endl;
-
-    std::cout << "Hello, World!" << std::endl;
-
-    std::cout << "math power:" << std::endl;
-    double base = 2;
-    int exponent = 4;
-#ifdef USE_MYMATH
-    cout << "Use our own math library" << endl;
-    double result = power(base, exponent);
-#else
-    cout << "Use the standard library" << endl;
-    double result = pow(base, exponent);
-#endif
-    cout << base << "^" << exponent << "=" << result << endl;
-
-
-    // json test
-    cout << "Json practice" << endl;
-    //    auto f_in = program.get("i");
-    //    auto f_out = program.get("o");
-    //    jsonPractice(f_in, f_out);
-
-    // least square method test
-    Eigen::VectorXf coeff = norm_test();
-
-    // ransac test
-    ransacTest();
+    MultiThreadTest();
 
 
     return 0;
