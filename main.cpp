@@ -213,11 +213,51 @@ void WriteTxtDemo() {
     out_file << setprecision(10) << M_PI << M_PI << M_PI << M_PI << endl;
 }
 
+void vector_demo() {
+    // 初始化vector指定长度，但不赋值时的初始值测试
+    vector<pair<int, int>> vec_pair(5);
+    cout << vec_pair[4].first << endl;
 
+    // 迭代器长度计算
+    auto length = vec_pair.end() - vec_pair.begin();
+
+    int debug = 1;
+}
+
+void EigenDemo() {
+    chrono::steady_clock::time_point s_time = std::chrono::steady_clock::now();
+    int n = 10;
+    Eigen::Matrix<float, 3, Eigen::Dynamic> last_coord(3, n);
+    Eigen::Matrix<float, 3, Eigen::Dynamic> cur_coord(3, n);
+    Eigen::Matrix3d mat3d = Eigen::Matrix3d::Ones();
+    Eigen::Vector3d vec3d(1, 2, 3);
+    cout << mat3d << endl;
+    cout << vec3d << endl;
+    // broadcast,
+    // auto res = mat3d + vec3d.transpose();
+    mat3d.colwise() += vec3d;
+    cout << mat3d << endl;
+    // cur_coord = rotation_matrix4 * last_coord;
+    int debug = 1;
+}
+struct lan3d {
+    float x;
+    float y;
+    float z;
+};
+struct lane3dw {
+    lan3d pt;
+    float w;
+};
 int main(int argc, char *argv[]) {
+    lan3d a{1, 2, 3};
+    vector<lane3dw> Points{{a, 0.5}};
+    auto dd = Points.back().pt.x - Points.front().pt.x;
+    // EigenDemo();
+    // vector_demo();
 
     // 多线程demo
-    ProducerConsumerDemo();
+    // ProducerConsumerDemo();
 
     // json demo
     // jsonPractice("dd", "tmp.json");
