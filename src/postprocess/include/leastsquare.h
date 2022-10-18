@@ -11,7 +11,7 @@
 using namespace std;
 
 Eigen::VectorXf LSFit(vector<float> &X, vector<float> &Y, uint8_t orders);
-
+void QrLS();
 Eigen::VectorXf norm_test();
 void ransacFitCV(const std::vector<cv::Point2f> &points,
                  cv::Vec4f &line,

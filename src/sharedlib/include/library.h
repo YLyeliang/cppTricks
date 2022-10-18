@@ -20,4 +20,6 @@ T sum(T first, Types... rest) {
 
 void ProducerConsumerDemo();
 
+void IODemo();
+
 #endif

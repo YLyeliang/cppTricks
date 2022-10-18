@@ -1,5 +1,6 @@
 #include "library.h"
 #include "condition_variable"
+#include "fstream"
 #include "future"
 #include "mutex"
 #include "queue"
@@ -294,7 +295,14 @@ void Dispatch(int ConsumerNum, int ProducerNum) {
 }
 
 
-void ProducerConsumerDemo(){
+void ProducerConsumerDemo() {
     //一个消费者线程，5个生产者线程，则生产者经常要等待消费者
-    Dispatch(1,5);
+    Dispatch(1, 5);
+}
+
+void IODemo() {
+    std::string file_name = "config.h";
+    ifstream f(file_name.c_str());
+    bool status = f.good();
+    bool debug = 1;
 }
