@@ -11,7 +11,7 @@ message("project binary dir" ${PROJECT_BINARY_DIR})
 
 file(GLOB_RECURSE SOURCE_FILES ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 #创建共享库
-add_library(postprocess SHARED ${SOURCE_FILES} src/leastsquare.cpp include/leastsquare.h src/matrix_demo.cpp include/matrix_demo.h include/ransac.h src/ransac.cpp)
+add_library(postprocess SHARED ${SOURCE_FILES} src/leastsquare.cpp include/leastsquare.h src/matrix_demo.cpp include/matrix_demo.h include/ransac.h src/ransac.cpp include/lane_base.h src/lane_test.cpp include/lane_test.h)
 # 包含头文件
 target_include_directories(${PROJECT_NAME} PUBLIC include ${OpenMP_CXX_INCLUDE_DIRS})
 

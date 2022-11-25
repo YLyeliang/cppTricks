@@ -3,7 +3,7 @@ project(pointcloud)
 
 file(GLOB_RECURSE SOURCE_FILES ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 # 生成动态库
-add_library(pointcloud SHARED ${SOURCE_FILES} include/demo.h)
+add_library(pointcloud SHARED ${SOURCE_FILES} include/demo.h include/lidar_base.h src/lidar_demo.cpp include/lidar_demo.h)
 
 # pcl
 find_package(PCL 1.10 REQUIRED)
